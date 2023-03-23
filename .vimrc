@@ -16,63 +16,103 @@ set nobackup
 set nowritebackup
 set colorcolumn=80
 set updatetime=300
-
+set clipboard=unnamedplus,unnamed
 " Turning of the terminal sound
 set vb
 set visualbell
+set laststatus=2
+
 
 " Building my own status bar 
-set laststatus=2
 set statusline = 
 set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
 set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
 set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ REPLACE\ ':''}
 set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
-"set statusline+=\ %n
+"set statusline+=\%n
 set statusline+=%#Visual#  "Color
 set statusline+=%{&paste?'\ PASTE\ ':''}
 set statusline+=%{&spell?'\ SPELL\ ':''}
 set statusline+=%#CursorIM#
-"set statusline+=%R
+set statusline+=%R
 "set statusline+=%M
 set statusline+=%#Cursor#
 set statusline+=%#CursorLine#
 set statusline+=\ %t
 set statusline+=%=
 set statusline+=%#CursorLine#
-set statusline+=\ %Y:                   "File Type
+set statusline+=\ %y:                   "File Type
 set statusline+=\[%{&fileformat}\]      "Operating System
 set statusline+=%#CursorIM#
-set statusline+=\%3l:%-2c:              " Line + Column
+set statusline+=\%3l:%-2c:              "Line + Column
 set statusline+=%#Cursor#
 set statusline+=\%3p%%\ 			    " Percentage
 "set statusline+=\ %f
 
 " Here is The end of the status bar setting
 
+" To copy from vim to clipboard press Control+y
+vmap <C-y> "+y
+
+
+
 call plug#begin()
 
-"Plug 'sheerun/vim-polyglot',
-Plug 'mattn/emmet-vim',
-Plug 'neoclide/coc.nvim', {'branch': 'release'},
+Plug 'sheerun/vim-polyglot',
+
+" ColorScheme
 Plug 'morhetz/gruvbox',
+
+" Auto close any character
 Plug 'jiangmiao/auto-pairs',
+
+" Concquer of Completion
+" AutoCompeltion and other stuff 
+Plug 'neoclide/coc.nvim', {'branch': 'release'},
+
+" Language specific plugin
+Plug 'mattn/emmet-vim',
 Plug 'lepture/vim-jinja',
 Plug 'rust-lang/rust.vim',
 Plug 'hdima/python-syntax',
+Plug 'vimjas/vim-python-pep8-indent'
+" Connecting Git with vim
 Plug 'airblade/vim-gitgutter',
+
+" Fuzzy finding over the file
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } },
 Plug 'junegunn/fzf.vim',
+
+" Commenting line or block
 Plug 'tpope/vim-commentary',
+
+" tmux and vim navigation
 Plug 'christoomey/vim-tmux-navigator',
+
+
+" This plugin allows you run the external commands asynchronously, without
+" exiting from vim.
+Plug 'tpope/vim-dispatch'
+Plug 'aliev/vim-python'
+
+
+
 call plug#end()
 
-set background=dark
-colorscheme gruvbox 
+
 
 let mapleader =" "
 
+"ColorScheme
+set background=dark
+colorscheme gruvbox 
+
+
+
 let g:python_highlight_all = 1
+let g:python_highlight_space_errors = 0
+
+
 
 "fzf specific setting
 nnoremap <C-p> :Files<Cr>
@@ -84,16 +124,11 @@ nnoremap <C-p> :Files<Cr>
 let g:fzf_preview_window = ['hidden,right,50%,<70(up,40%)', 'ctrl-/']
 let g:fzf_layout = { 'down': '40%' }
 
-"
 
 " Starting from this
 let g:rustfmt_autosave = 1
 nnoremap gp :slient %!prettier --stdin-filepath %<CR>
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
-" To This is auto formating
-
-
-
 
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
