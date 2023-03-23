@@ -1,0 +1,36 @@
+!! URxvt Appearance
+URxvt.letterSpace: -1
+URxvt.lineSpace: -1
+URxvt.internalBorder:6 
+URxvt.cursorBlink: true
+URxvt.depth: 24
+
+URxvt.background: #282828
+URxvt.foreground: #ebdbb2
+URxvt.iso14755: off
+URxvt.iso14755_52: off
+
+
+!URxvt.font: xft:CamingoCode:style=Regular:size=10
+URxvt.font: xft:iMWritingMonos NF:style=Regular:size=10
+!URxvt.font: xft:Lilex NF:style=Regular:size=10
+!URxvt.font: xft:Noto Sans Mono:style=Regular:size=10
+!URxvt.font: xft:agave Nerd Font:style=Regular:size=10
+!URxvt.font: xft:CaskaydiaCove Nerd Font:style=Regular:size=10
+!URxvt.font: xft:DejaVuSansMono NF:style=Regular:size=10
+!URxvt.font: xft:FiraCode NF:style=Regular:size=10
+!URxvt.font: xft:FuraMono NF:style=Regular:size=10
+!URxvt.font: xft:Hack Nerd Font:style=Regular:size=10
+
+
+URxvt.scrollBar: false
+URxvt.geometry: 300x200
+
+! Copy and Past in the rxvt:
+! For copying: CTRL+ALT+C
+! For pasting: CTRL+ALT+V
+
+
+
+
+
