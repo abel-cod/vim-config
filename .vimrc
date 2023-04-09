@@ -1,5 +1,7 @@
+
 filetype plugin indent on
 syntax on
+
 set encoding=utf-8
 set nocompatible
 set number relativenumber
@@ -8,7 +10,6 @@ set nohlsearch incsearch
 set autoread
 set undofile
 set hidden
-set wrap
 set smartcase
 set termguicolors
 set smartindent
@@ -17,83 +18,108 @@ set nowritebackup
 set colorcolumn=80
 set updatetime=300
 set clipboard=unnamedplus,unnamed
-" Turning of the terminal sound
+
+" Turning off the terminal sound
 set vb
 set visualbell
 set laststatus=2
 
 
-" Building my own status bar 
-set statusline = 
-set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
-set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
-set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ REPLACE\ ':''}
-set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
-"set statusline+=\%n
-set statusline+=%#Visual#  "Color
-set statusline+=%{&paste?'\ PASTE\ ':''}
-set statusline+=%{&spell?'\ SPELL\ ':''}
-set statusline+=%#CursorIM#
-set statusline+=%R
-"set statusline+=%M
-set statusline+=%#Cursor#
-set statusline+=%#CursorLine#
-set statusline+=\ %t
-set statusline+=%=
-set statusline+=%#CursorLine#
-set statusline+=\ %y:                   "File Type
-set statusline+=\[%{&fileformat}\]      "Operating System
-set statusline+=%#CursorIM#
-set statusline+=\%3l:%-2c:              "Line + Column
-set statusline+=%#Cursor#
-set statusline+=\%3p%%\ 			    " Percentage
+""""""""""""""    Building Custome Status Bar      """"""""""""""
+"set statusline = 
+"set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
+"set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
+"set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ REPLACE\ ':''}
+"set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
+""set statusline+=\%n
+"set statusline+=%#Visual#  "Color
+"set statusline+=%{&paste?'\ PASTE\ ':''}
+"set statusline+=%{&spell?'\ SPELL\ ':''}
+"set statusline+=%#CursorIM#
+"set statusline+=%R
+""set statusline+=%M
+"set statusline+=%#Cursor#
+"set statusline+=%#CursorLine#
+"set statusline+=\ %t
+"set statusline+=%=
+"set statusline+=%#CursorLine#
+"set statusline+=\ %y:                   "File Type
+"set statusline+=\[%{&fileformat}\]      "Operating System
+"set statusline+=%#CursorIM#
+"set statusline+=\%3l:%-2c:              "Line + Column
+"set statusline+=%#Cursor#
+"set statusline+=\%3p%%\ 			    " Percentage
+
 "set statusline+=\ %f
-
-" Here is The end of the status bar setting
-
-" To copy from vim to clipboard press Control+y
-vmap <C-y> "+y
 
 
 
 call plug#begin()
 
-Plug 'sheerun/vim-polyglot',
 
 " ColorScheme
 Plug 'morhetz/gruvbox',
+Plug 'lifepillar/vim-gruvbox8',
+Plug 'crusoexia/vim-monokai',
+Plug 'chriskempson/base16-vim',
+Plug 'altercation/vim-colors-solarized',
+Plug 'jnurmine/zenburn',
 
-" Auto close any character
+"""""   """""
+Plug 'jszakmeister/vim-togglecursor',
+Plug 'jmcantrell/vim-virtualenv',
+Plug 'ryanoasis/vim-devicons',
+Plug 'ervandew/supertab',
+Plug 'kien/ctrlp.vim',
+Plug 'slim-template/vim-slim',
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'nlknguyen/copy-cut-paste.vim'
+
+
+" Additional plug 
+Plug 'yggdroot/indentline',
+Plug 'stylelint/stylelint',
+Plug 'bmatcuk/stylelint-lsp',
+Plug 'tpope/vim-surround',
+Plug 'prettier/vim-prettier', {'do': 'npm install --frozen-lockfile --production'}
+Plug 'tpope/vim-commentary',
+Plug 'christoomey/vim-tmux-navigator',
+Plug 'vim-airline/vim-airline',
 Plug 'jiangmiao/auto-pairs',
 
-" Concquer of Completion
-" AutoCompeltion and other stuff 
-Plug 'neoclide/coc.nvim', {'branch': 'release'},
+
+" Syntax checking 
+Plug 'w0rp/ale',
+Plug 'sheerun/vim-polyglot',
+
+
 
 " Language specific plugin
 Plug 'mattn/emmet-vim',
 Plug 'lepture/vim-jinja',
 Plug 'rust-lang/rust.vim',
 Plug 'hdima/python-syntax',
-Plug 'vimjas/vim-python-pep8-indent'
+Plug 'tell-k/vim-autopep8',
+Plug 'tomlion/vim-solidity',
+Plug 'leafgarland/typescript-vim',
+Plug 'pangloss/vim-javascript',
+Plug 'aliev/vim-python'
+Plug 'suan/vim-instant-markdown',
+Plug 'fatih/vim-go',
+
+
 " Connecting Git with vim
 Plug 'airblade/vim-gitgutter',
-
-" Fuzzy finding over the file
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } },
-Plug 'junegunn/fzf.vim',
-
-" Commenting line or block
-Plug 'tpope/vim-commentary',
-
-" tmux and vim navigation
-Plug 'christoomey/vim-tmux-navigator',
+Plug 'tpope/vim-fugitive',
 
 
-" This plugin allows you run the external commands asynchronously, without
-" exiting from vim.
-Plug 'tpope/vim-dispatch'
-Plug 'aliev/vim-python'
+" File Tree
+Plug 'preservim/nerdtree',
+
+
+"Concur of completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 
 
@@ -105,12 +131,24 @@ let mapleader =" "
 
 "ColorScheme
 set background=dark
-colorscheme gruvbox 
-
-
+colorscheme gruvbox
+let g:gruvbox_contrast_light='hard'
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_termcolors=16
+set guicursor+=i:block-cursor
 
 let g:python_highlight_all = 1
 let g:python_highlight_space_errors = 0
+let g:ale_virtualtext_cursor = 'none'
+let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+let g:bargreybars_auto = 0
+
+"""""""  Nerd Tree config   """""""
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+
+
+
 
 
 
@@ -128,8 +166,28 @@ let g:fzf_layout = { 'down': '40%' }
 " Starting from this
 let g:rustfmt_autosave = 1
 nnoremap gp :slient %!prettier --stdin-filepath %<CR>
-command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
+
+
+
+
+""" CCp custome keymaps """
+let g:copy_cut_past_no_mapping = 1
+
+nmap uy <Plug>CCP_CopyLine
+vmap uy <Plug>CCP_CopyText
+nmap uo <Plug>CCP_CutLine
+vmap uo <Plug>CCP_CutText
+nmap up <Plug>CCP_PastText
+
+
+
+
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
@@ -269,6 +327,4 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR
-
-
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
