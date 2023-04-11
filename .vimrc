@@ -62,8 +62,6 @@ Plug 'morhetz/gruvbox',
 Plug 'lifepillar/vim-gruvbox8',
 Plug 'crusoexia/vim-monokai',
 Plug 'chriskempson/base16-vim',
-Plug 'altercation/vim-colors-solarized',
-Plug 'jnurmine/zenburn',
 
 """""   """""
 Plug 'jszakmeister/vim-togglecursor',
@@ -78,8 +76,6 @@ Plug 'nlknguyen/copy-cut-paste.vim'
 
 " Additional plug 
 Plug 'yggdroot/indentline',
-Plug 'stylelint/stylelint',
-Plug 'bmatcuk/stylelint-lsp',
 Plug 'tpope/vim-surround',
 Plug 'prettier/vim-prettier', {'do': 'npm install --frozen-lockfile --production'}
 Plug 'tpope/vim-commentary',
@@ -105,7 +101,7 @@ Plug 'leafgarland/typescript-vim',
 Plug 'pangloss/vim-javascript',
 Plug 'aliev/vim-python'
 Plug 'suan/vim-instant-markdown',
-Plug 'fatih/vim-go',
+Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
 
 
 " Connecting Git with vim
@@ -121,7 +117,10 @@ Plug 'preservim/nerdtree',
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 
+"Fuzzie finding 
 
+Plug 'junegunn/fzf', {'do': { ->fzf#install() }}
+Plug 'junegunn/fzf.vim',
 
 call plug#end()
 
@@ -148,10 +147,6 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 
 
-
-
-
-
 "fzf specific setting
 nnoremap <C-p> :Files<Cr>
 " C-c will exit from the fzf
@@ -159,16 +154,14 @@ nnoremap <C-p> :Files<Cr>
 " you can also use C-b to open file in virticalsplit
 " you can also use C-x to open file in Horizontalsplit
 " you can use the command Buffer to open the file that was open by the fzf.
-let g:fzf_preview_window = ['hidden,right,50%,<70(up,40%)', 'ctrl-/']
-let g:fzf_layout = { 'down': '40%' }
 
+"let g:fzf_preview_window = ['hidden,right,50%,<70(up,40%)', 'ctrl-/']
+"let g:fzf_layout = { 'down': '40%' }
+let g:fzf_layout = {'window': {'width': 0.9, 'height': 0.6}}
 
 " Starting from this
 let g:rustfmt_autosave = 1
 nnoremap gp :slient %!prettier --stdin-filepath %<CR>
-
-
-
 
 
 """ CCp custome keymaps """
@@ -179,8 +172,6 @@ vmap uy <Plug>CCP_CopyText
 nmap uo <Plug>CCP_CutLine
 vmap uo <Plug>CCP_CutText
 nmap up <Plug>CCP_PastText
-
-
 
 
 " Use tab for trigger completion with characters ahead and navigate
