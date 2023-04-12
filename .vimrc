@@ -60,7 +60,6 @@ call plug#begin()
 " ColorScheme
 Plug 'morhetz/gruvbox',
 Plug 'lifepillar/vim-gruvbox8',
-Plug 'crusoexia/vim-monokai',
 Plug 'chriskempson/base16-vim',
 
 """""   """""
@@ -78,6 +77,8 @@ Plug 'nlknguyen/copy-cut-paste.vim'
 Plug 'yggdroot/indentline',
 Plug 'tpope/vim-surround',
 Plug 'prettier/vim-prettier', {'do': 'npm install --frozen-lockfile --production'}
+Plug 'yaegassy/coc-ruff', {'do': 'npm install --frozen-lockfile'}
+
 Plug 'tpope/vim-commentary',
 Plug 'christoomey/vim-tmux-navigator',
 Plug 'vim-airline/vim-airline',
@@ -88,10 +89,11 @@ Plug 'jiangmiao/auto-pairs',
 Plug 'w0rp/ale',
 Plug 'sheerun/vim-polyglot',
 
-
+Plug 'pappasam/coc-jedi', {'do': 'npm install --frozen-lockfile && npm run build', 'branch': 'main'}
 
 " Language specific plugin
 Plug 'mattn/emmet-vim',
+Plug 'othree/html5.vim',
 Plug 'lepture/vim-jinja',
 Plug 'rust-lang/rust.vim',
 Plug 'hdima/python-syntax',
@@ -124,9 +126,22 @@ Plug 'junegunn/fzf.vim',
 
 call plug#end()
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', {'do': 'UpdateRemotePlugins'}
+else
+  Plug 'Shougo/deoplete.nvim',
+  Plug 'roxma/nvim-yarp', {'do': 'pip install -r requirements.txt'}
+  Plug 'roxma/vim-hug-neovim-rpc',
+endif
+
+
+
 
 
 let mapleader =" "
+
+
+let g:deoplete#enable_at_startup = 1
 
 "ColorScheme
 set background=dark
