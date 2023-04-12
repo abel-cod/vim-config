@@ -140,8 +140,63 @@ endif
 
 let mapleader =" "
 
-
 let g:deoplete#enable_at_startup = 1
+
+"""""" ALE SETTINGS  """"""
+
+" ale native automatic completion support.
+let g:ale_completion_enabled = 1
+
+"Disable whitespace warnings
+let g:ale_warn_about_trailing_whitespace = 0
+
+" disableing virual text for the current buffer
+let g:ale_virtualtext_cursor = 'current'
+
+"Disable virtualtext completely
+let g:ale_virtualtext_cursor = 'disable'
+
+"setting some backrground colors automatically for warnings and error in teh
+"sign gutter.
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+
+" If ale is running in combination with another lsp client, it may be good to 
+" disable ale lsp functionality entirely.
+let g:ale_disable_lsp = 1
+
+" Automatically fix file when they are saved.
+let g:ale_fix_on_save = 1
+
+" Integrating ale with other completion plugin like deoplete
+" call deoplete#custom#option('sources', {
+"             \'_': ['ale'],
+"             \})
+
+" ale support automatic import from external modules. its enabled by default 
+" if you don't want it you can disable it using
+" let g:ale_completion_autoimport = 0
+
+" Customise sign
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+
+"confiure the sign gutter open at all times
+let g:ale_sign_column_always = 1
+
+
+" Highlight can be disable completely by setting
+let g:ale_set_highlights = 0
+
+" highlight colorscheme
+highlight ALEWarning ctermbg=DarkMagenta
+
+"Displaying error information in the status bar. with vim airline
+" leg g:airline#extensions#ale#enabled = 1
+
+"Changing the border for floating preview windwos
+"let g:ale_floating_window_border = ['|', '-', '╭', '╮', '╯', '╰', '│', '-']
+let g:ale_floating_window_border = repeat([''], 8)
 
 "ColorScheme
 set background=dark
