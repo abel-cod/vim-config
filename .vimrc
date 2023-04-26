@@ -1,6 +1,6 @@
 
-filetype plugin indent on
 syntax on
+filetype plugin indent on
 
 set encoding=utf-8
 set nocompatible
@@ -9,6 +9,7 @@ set tabstop=4 shiftwidth=4
 set nohlsearch incsearch
 set autoread
 set undofile
+set wrap
 set hidden
 set smartcase
 set termguicolors
@@ -17,58 +18,32 @@ set nobackup
 set nowritebackup
 set colorcolumn=80
 set updatetime=300
+set guioptions-=T
+set foldmethod=marker
+set ruler
+set ttyfast
+set lazyredraw
+set synmaxcol=500
+set laststatus=2
+set showcmd
+set mouse=a
+set shortmess+=c
 set clipboard=unnamedplus,unnamed
 
-" Turning off the terminal sound
-set vb
-set visualbell
-set laststatus=2
 
-
-""""""""""""""    Building Custome Status Bar      """"""""""""""
-"set statusline = 
-"set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
-"set statusline+=%#DiffChange#%{(mode()=='i')?'\ \ INSERT\ ':''}
-"set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ REPLACE\ ':''}
-"set statusline+=%#Cursor#%{(mode()=='v')?'\ \ VISUAL\ ':''}
-""set statusline+=\%n
-"set statusline+=%#Visual#  "Color
-"set statusline+=%{&paste?'\ PASTE\ ':''}
-"set statusline+=%{&spell?'\ SPELL\ ':''}
-"set statusline+=%#CursorIM#
-"set statusline+=%R
-""set statusline+=%M
-"set statusline+=%#Cursor#
-"set statusline+=%#CursorLine#
-"set statusline+=\ %t
-"set statusline+=%=
-"set statusline+=%#CursorLine#
-"set statusline+=\ %y:                   "File Type
-"set statusline+=\[%{&fileformat}\]      "Operating System
-"set statusline+=%#CursorIM#
-"set statusline+=\%3l:%-2c:              "Line + Column
-"set statusline+=%#Cursor#
-"set statusline+=\%3p%%\ 			    " Percentage
-
-"set statusline+=\ %f
-
-
+let mapleader =" "
 
 call plug#begin()
 
 
 " ColorScheme
 Plug 'morhetz/gruvbox',
-Plug 'lifepillar/vim-gruvbox8',
 Plug 'chriskempson/base16-vim',
 
 """""   """""
 Plug 'jszakmeister/vim-togglecursor',
 Plug 'jmcantrell/vim-virtualenv',
 Plug 'ryanoasis/vim-devicons',
-Plug 'ervandew/supertab',
-Plug 'kien/ctrlp.vim',
-Plug 'slim-template/vim-slim',
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'nlknguyen/copy-cut-paste.vim'
 
@@ -81,12 +56,12 @@ Plug 'yaegassy/coc-ruff', {'do': 'npm install --frozen-lockfile'}
 
 Plug 'tpope/vim-commentary',
 Plug 'christoomey/vim-tmux-navigator',
-Plug 'vim-airline/vim-airline',
+Plug 'itchyny/lightline.vim',
 Plug 'jiangmiao/auto-pairs',
 
 
 " Syntax checking 
-Plug 'w0rp/ale',
+Plug 'dense-analysis/ale',
 Plug 'sheerun/vim-polyglot',
 
 Plug 'pappasam/coc-jedi', {'do': 'npm install --frozen-lockfile && npm run build', 'branch': 'main'}
@@ -110,7 +85,6 @@ Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
 Plug 'airblade/vim-gitgutter',
 Plug 'tpope/vim-fugitive',
 
-
 " File Tree
 Plug 'preservim/nerdtree',
 
@@ -120,7 +94,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 
 "Fuzzie finding 
-
 Plug 'junegunn/fzf', {'do': { ->fzf#install() }}
 Plug 'junegunn/fzf.vim',
 
@@ -134,82 +107,23 @@ else
   Plug 'roxma/vim-hug-neovim-rpc',
 endif
 
+"ColorScheme
+set background=dark
+colorscheme base16-atelier-dune
+hi Normal ctermbg=None
 
-
-
-
-let mapleader =" "
+" let g:gruvbox_contrast_light='medium'
+" let g:gruvbox_contrast_dark='medium'
+" let g:gruvbox_termcolors=16
+" set guicursor+=i:block-cursor
 
 let g:deoplete#enable_at_startup = 1
 
-"""""" ALE SETTINGS  """"""
-
-" ale native automatic completion support.
-let g:ale_completion_enabled = 1
-
-"Disable whitespace warnings
-let g:ale_warn_about_trailing_whitespace = 0
-
-" disableing virual text for the current buffer
-let g:ale_virtualtext_cursor = 'current'
-
-"Disable virtualtext completely
-let g:ale_virtualtext_cursor = 'disable'
-
-"setting some backrground colors automatically for warnings and error in teh
-"sign gutter.
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-
-" If ale is running in combination with another lsp client, it may be good to 
-" disable ale lsp functionality entirely.
-let g:ale_disable_lsp = 1
-
-" Automatically fix file when they are saved.
-let g:ale_fix_on_save = 1
-
-" Integrating ale with other completion plugin like deoplete
-" call deoplete#custom#option('sources', {
-"             \'_': ['ale'],
-"             \})
-
-" ale support automatic import from external modules. its enabled by default 
-" if you don't want it you can disable it using
-" let g:ale_completion_autoimport = 0
-
-" Customise sign
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
-
-"confiure the sign gutter open at all times
-let g:ale_sign_column_always = 1
-
-
-" Highlight can be disable completely by setting
-let g:ale_set_highlights = 0
-
-" highlight colorscheme
-highlight ALEWarning ctermbg=DarkMagenta
-
-"Displaying error information in the status bar. with vim airline
-" leg g:airline#extensions#ale#enabled = 1
-
-"Changing the border for floating preview windwos
-"let g:ale_floating_window_border = ['|', '-', '╭', '╮', '╯', '╰', '│', '-']
-let g:ale_floating_window_border = repeat([''], 8)
-
-"ColorScheme
-set background=dark
-colorscheme gruvbox
-let g:gruvbox_contrast_light='hard'
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_termcolors=16
-set guicursor+=i:block-cursor
-
 let g:python_highlight_all = 1
 let g:python_highlight_space_errors = 0
-let g:ale_virtualtext_cursor = 'none'
-let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+
+
+" let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 let g:bargreybars_auto = 0
 
 """""""  Nerd Tree config   """""""
@@ -224,15 +138,23 @@ nnoremap <C-p> :Files<Cr>
 " you can also use C-b to open file in virticalsplit
 " you can also use C-x to open file in Horizontalsplit
 " you can use the command Buffer to open the file that was open by the fzf.
-
-"let g:fzf_preview_window = ['hidden,right,50%,<70(up,40%)', 'ctrl-/']
-"let g:fzf_layout = { 'down': '40%' }
-let g:fzf_layout = {'window': {'width': 0.9, 'height': 0.6}}
-
 " Starting from this
-let g:rustfmt_autosave = 1
-nnoremap gp :slient %!prettier --stdin-filepath %<CR>
 
+
+" let g:fzf_preview_window = ['hidden,right,50%,<70(up,40%)', 'ctrl-/']
+let g:fzf_preview_window = ['right,70%', 'ctrl-/']
+
+let g:fzf_buffers_jump = 1
+
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+let g:fzf_tags_command = 'ctags -R'
+
+let g:fzf_commands_expect = 'alt-enter, ctrl-x'
+
+let g:rustfmt_autosave = 1
+
+nnoremap gp :slient %!prettier --stdin-filepath %<CR>
 
 """ CCp custome keymaps """
 let g:copy_cut_past_no_mapping = 1
@@ -244,12 +166,7 @@ vmap uo <Plug>CCP_CutText
 nmap up <Plug>CCP_PastText
 
 
-" Use tab for trigger completion with characters ahead and navigate
-" NOTE: There's always complete item selected by default, you may want to enable
-" no select by `"suggest.noselect": true` in your configuration file
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config
-inoremap <silent><expr> <TAB>
+noremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
@@ -389,3 +306,64 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+
+
+"""""" ALE SETTINGS  """"""
+
+" ale native automatic completion support.
+let g:ale_completion_enabled = 1
+
+"Disable whitespace warnings
+let g:ale_warn_about_trailing_whitespace = 0
+
+" disableing virual text for the current buffer
+let g:ale_virtualtext_cursor = 'current'
+
+"Disable virtualtext completely
+let g:ale_virtualtext_cursor = 'disable'
+
+"setting some backrground colors automatically for warnings and error in teh
+"sign gutter.
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+
+" If ale is running in combination with another lsp client, it may be good to 
+" disable ale lsp functionality entirely.
+let g:ale_disable_lsp = 1
+
+" Automatically fix file when they are saved.
+let g:ale_fix_on_save = 1
+
+" Integrating ale with other completion plugin like deoplete
+" call deoplete#custom#option('sources', {
+"             \'_': ['ale'],
+"             \})
+
+" ale support automatic import from external modules. its enabled by default 
+" if you don't want it you can disable it using
+" let g:ale_completion_autoimport = 0
+
+" Customise sign
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+
+"confiure the sign gutter open at all times
+let g:ale_sign_column_always = 1
+
+
+" Highlight can be disable completely by setting
+let g:ale_set_highlights = 0
+
+" highlight colorscheme
+highlight ALEWarning ctermbg=DarkMagenta
+
+"Displaying error information in the status bar. with vim airline
+" leg g:airline#extensions#ale#enabled = 1
+
+"Changing the border for floating preview windwos
+let g:ale_floating_window_border = repeat([''], 8)
+
+let g:ale_virtualtext_cursor = 'none'
+
+let g:asyncomplete_auto_popup = 1
