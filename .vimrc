@@ -52,19 +52,19 @@ Plug 'nlknguyen/copy-cut-paste.vim'
 Plug 'yggdroot/indentline',
 Plug 'tpope/vim-surround',
 Plug 'prettier/vim-prettier', {'do': 'npm install --frozen-lockfile --production'}
-Plug 'yaegassy/coc-ruff', {'do': 'npm install --frozen-lockfile'}
 
 Plug 'tpope/vim-commentary',
 Plug 'christoomey/vim-tmux-navigator',
 Plug 'itchyny/lightline.vim',
 Plug 'jiangmiao/auto-pairs',
 
+Plug 'yaegassy/coc-htmldjango', {'do': 'npm install --frozen-lockfile'}
 
 " Syntax checking 
 Plug 'dense-analysis/ale',
 Plug 'sheerun/vim-polyglot',
 
-Plug 'pappasam/coc-jedi', {'do': 'npm install --frozen-lockfile && npm run build', 'branch': 'main'}
+" Plug 'pappasam/coc-jedi', {'do': 'npm install --frozen-lockfile && npm run build', 'branch': 'main'}
 
 " Language specific plugin
 Plug 'mattn/emmet-vim',
