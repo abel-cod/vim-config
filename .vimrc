@@ -31,10 +31,12 @@ set shortmess+=c
 set clipboard=unnamedplus,unnamed
 
 
+
 let mapleader =" "
 
 call plug#begin()
 
+Plug 'dstein64/vim-startuptime',
 
 " ColorScheme
 Plug 'morhetz/gruvbox',
@@ -87,10 +89,15 @@ Plug 'tpope/vim-fugitive',
 
 " File Tree
 Plug 'preservim/nerdtree',
+Plug 'mcchrish/nnn.vim',
 
 
 "Concur of completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'roxma/nvim-yarp', {'do': 'pip install -r requirements.txt'}
+Plug 'roxma/vim-hug-neovim-rpc',
+
 
 
 "Fuzzie finding 
@@ -99,25 +106,17 @@ Plug 'junegunn/fzf.vim',
 
 call plug#end()
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', {'do': 'UpdateRemotePlugins'}
-else
-  Plug 'Shougo/deoplete.nvim',
-  Plug 'roxma/nvim-yarp', {'do': 'pip install -r requirements.txt'}
-  Plug 'roxma/vim-hug-neovim-rpc',
-endif
-
 "ColorScheme
 set background=dark
-colorscheme base16-atelier-dune
+" source ~/vim-config/base16-vim/colors/base16-gruvbox-dark-hard.vim
+" colorscheme base16-atelier-dune
+colorscheme base16-gruvbox-dark-hard
 hi Normal ctermbg=None
 
 " let g:gruvbox_contrast_light='medium'
 " let g:gruvbox_contrast_dark='medium'
 " let g:gruvbox_termcolors=16
 " set guicursor+=i:block-cursor
-
-let g:deoplete#enable_at_startup = 1
 
 let g:python_highlight_all = 1
 let g:python_highlight_space_errors = 0
@@ -334,16 +333,6 @@ let g:ale_disable_lsp = 1
 
 " Automatically fix file when they are saved.
 let g:ale_fix_on_save = 1
-
-" Integrating ale with other completion plugin like deoplete
-" call deoplete#custom#option('sources', {
-"             \'_': ['ale'],
-"             \})
-
-" ale support automatic import from external modules. its enabled by default 
-" if you don't want it you can disable it using
-" let g:ale_completion_autoimport = 0
-
 " Customise sign
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
@@ -367,3 +356,13 @@ let g:ale_floating_window_border = repeat([''], 8)
 let g:ale_virtualtext_cursor = 'none'
 
 let g:asyncomplete_auto_popup = 1
+
+
+let g:nnn#set_default_mappings = 0
+
+nnoremap <silent> <leader>nn :NnnPicker<CR>
+
+nnoremap <leader>n :NnnPicker %:p:h<CR>
+
+
+
